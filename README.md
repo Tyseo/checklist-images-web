@@ -17,7 +17,6 @@ Cette checklist vous aide à optimiser vos images pour le web en couvrant 4 doma
 - 📱 **Design responsive** pour mobile, tablette et desktop
 - 🎨 **Interface moderne** et intuitive
 - 🔽 **Sections repliables** pour une navigation facile
-- 🏷️ **Badges PRO et SEO** pour identifier les points clés
 - 💡 **Tips pratiques** avec outils et conseils
 
 ## 🚀 Démo en ligne
