@@ -22,12 +22,12 @@ Cette checklist vous aide à optimiser vos images pour le web en couvrant 4 doma
 
 ## 🚀 Démo en ligne
 
-[Voir la démo](https://github.com/Tyseo/checklist-images-web/)
+[Voir la démo](https://tyseo.github.io/checklist-images-web/)
 
 ## 📦 Installation
 
 ### Option 1 : Téléchargement direct
 
-1. Téléchargez le fichier `checklist-images-web.html`
+1. Téléchargez le fichier `index.html`
 2. Ouvrez-le dans votre navigateur
 3. C'est tout ! Aucune installation requise.
