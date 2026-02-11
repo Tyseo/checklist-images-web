@@ -1,5 +1,5 @@
 # checklist-images-web
-Une checklist interactive et complète pour optimiser vos images web selon les standards actuels.
+Une checklist interactive et complète pour optimiser vos images web selon les standards actuels destinée aux rédacteurs et aux non-professionnels du web.
 
 
 ## 🎯 Objectif
