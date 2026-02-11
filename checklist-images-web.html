@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist Images Web - Bonnes Pratiques</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(315deg, #3a4f5b 3%, #df165a 98%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1em;
+        }
+
+        .progress-bar {
+            position: sticky;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            margin-bottom: 30px;
+            background: #e0e0e0;
+            border-top: 10px solid #fff;
+            border-bottom: 10px solid #fff;
+}
+
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            padding: 6px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 25px;
+            background: #fafafa;
+            transition: all 0.3s;
+        }
+
+        .section:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .section-title {
+            font-size: 1.3em;
+            color: #667eea;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-progress {
+            background: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .checkbox-item:hover {
+            background: #f0f4ff;
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .checkbox-item.checked {
+            background: #e8f5e9;
+            border-color: #4caf50;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: #667eea;
+            margin-top: 2px;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            cursor: pointer;
+            flex: 1;
+            font-size: 0.95em;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .checkbox-item.checked label {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .tip {
+            background: #fff9e6;
+            border-left: 4px solid #ffc107;
+            padding: 10px 12px;
+            margin-top: 15px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .pro-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        .seo-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        .reset-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .reset-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .collapse-icon {
+            transition: transform 0.3s;
+        }
+
+        .section.collapsed .collapse-icon {
+            transform: rotate(-90deg);
+        }
+
+        .section.collapsed .checkbox-group,
+        .section.collapsed .tip {
+            display: none;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .reset-btn {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📸 Checklist Images Web</h1>
+        <p class="subtitle">Optimiser ses images pour le web</p>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress">0%</div>
+        </div>
+
+        <!-- FORMAT ET COMPRESSION -->
+        <div class="section" data-section="format">
+            <div class="section-header" onclick="toggleSection(this)">
+                <div class="section-title">
+                    <span class="collapse-icon">🔽</span>
+                    🎨 Format et Compression
+                </div>
+                <div class="section-progress">
+                    <span class="section-count">0/5</span>
+                </div>
+            </div>
+            
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="format-1" onchange="updateProgress()">
+                    <label for="format-1">Utiliser WebP ou AVIF pour photos (meilleure compression)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="format-2" onchange="updateProgress()">
+                    <label for="format-2">Utiliser SVG pour logos et icônes (format vectoriel)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="format-3" onchange="updateProgress()">
+                    <label for="format-3">Garder PNG uniquement pour images avec transparence</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="format-4" onchange="updateProgress()">
+                    <label for="format-4">Compresser toutes les images avant mise en ligne</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="format-5" onchange="updateProgress()">
+                    <label for="format-5">Viser moins de 100 Ko par image (200 Ko max pour bannières)</label>
+                </div>
+            </div>
+            <div class="tip">
+                💡 <strong>Formats 2026 :</strong> WebP (97% navigateurs) > AVIF (89%) > JPEG/PNG<br>
+                🛠️ <strong>Outils :</strong> Squoosh.app, TinyPNG, ImageOptim
+            </div>
+        </div>
+
+        <!-- DIMENSIONS -->
+        <div class="section" data-section="dimensions">
+            <div class="section-header" onclick="toggleSection(this)">
+                <div class="section-title">
+                    <span class="collapse-icon">🔽</span>
+                    📏 Dimensions et Résolution
+                </div>
+                <div class="section-progress">
+                    <span class="section-count">0/4</span>
+                </div>
+            </div>
+            
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="dim-1" onchange="updateProgress()">
+                    <label for="dim-1">Redimensionner aux dimensions d'affichage exactes (pas plus grand)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="dim-2" onchange="updateProgress()">
+                    <label for="dim-2">Utiliser 72 DPI (standard web, pas 300 DPI)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="dim-3" onchange="updateProgress()">
+                    <label for="dim-3">Créer plusieurs versions pour mobile/desktop (responsive)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="dim-4" onchange="updateProgress()">
+                    <label for="dim-4">Respecter les tailles recommandées (1920x1080 bannière, 1200x630 article, 400x300 miniature)</label>
+                </div>
+            </div>
+            <div class="tip">
+                ℹ️ <strong>Important :</strong> Le DPI n'affecte que l'impression, pas le web. Seul le nombre de pixels compte.
+            </div>
+        </div>
+
+        <!-- SEO ET ACCESSIBILITÉ -->
+        <div class="section" data-section="seo">
+            <div class="section-header" onclick="toggleSection(this)">
+                <div class="section-title">
+                    <span class="collapse-icon">🔽</span>
+                    🔍 SEO et Accessibilité
+                </div>
+                <div class="section-progress">
+                    <span class="section-count">0/5</span>
+                </div>
+            </div>
+            
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="seo-1" onchange="updateProgress()">
+                    <label for="seo-1">Ajouter un texte alt descriptif à chaque image</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="seo-2" onchange="updateProgress()">
+                    <label for="seo-2">Nommer les fichiers de façon descriptive avec tirets (ex: cuisine-moderne-blanche.webp)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="seo-3" onchange="updateProgress()">
+                    <label for="seo-3">Éviter caractères spéciaux, espaces, majuscules et accents dans les noms de fichiers</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="seo-4" onchange="updateProgress()">
+                    <label for="seo-4">Ajouter du contexte textuel autour de l'image</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="seo-5" onchange="updateProgress()">
+                    <label for="seo-5">Éviter les textes importants intégrés dans les images</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- DROITS -->
+        <div class="section" data-section="droits">
+            <div class="section-header" onclick="toggleSection(this)">
+                <div class="section-title">
+                    <span class="collapse-icon">🔽</span>
+                    ⚖️ Droits d'Utilisation
+                </div>
+                <div class="section-progress">
+                    <span class="section-count">0/4</span>
+                </div>
+            </div>
+            
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="droit-1" onchange="updateProgress()">
+                    <label for="droit-1">Vérifier le droit d'utiliser l'image (licence, autorisation)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="droit-2" onchange="updateProgress()">
+                    <label for="droit-2">Créditer l'auteur si requis par la licence</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="droit-3" onchange="updateProgress()">
+                    <label for="droit-3">Demander autorisation écrite pour photos de personnes identifiables</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="droit-4" onchange="updateProgress()">
+                    <label for="droit-4">Conserver une trace de la source et licence pour chaque image</label>
+                </div>
+            </div>
+            <div class="tip">
+                📚 <strong>Sources gratuites :</strong> Unsplash, Pexels, Pixabay<br>
+                💼 <strong>Payantes :</strong> Adobe Stock, Shutterstock
+            </div>
+        </div>
+
+        <button class="reset-btn" onclick="resetAll()">🔄 Réinitialiser</button>
+    </div>
+
+    <script>
+        const totalCheckboxes = document.querySelectorAll('input[type="checkbox"]').length;
+
+        function updateProgress() {
+            const checkedCount = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            const percentage = Math.round((checkedCount / totalCheckboxes) * 100);
+            
+            document.getElementById('progress').style.width = percentage + '%';
+            document.getElementById('progress').textContent = percentage + '%';
+
+            document.querySelectorAll('.section').forEach(section => {
+                const checkboxes = section.querySelectorAll('input[type="checkbox"]');
+                const checked = section.querySelectorAll('input[type="checkbox"]:checked').length;
+                const total = checkboxes.length;
+                
+                const counter = section.querySelector('.section-count');
+                counter.textContent = `${checked}/${total}`;
+
+                checkboxes.forEach(checkbox => {
+                    const item = checkbox.closest('.checkbox-item');
+                    if (checkbox.checked) {
+                        item.classList.add('checked');
+                    } else {
+                        item.classList.remove('checked');
+                    }
+                });
+            });
+
+            saveState();
+        }
+
+        function toggleSection(header) {
+            const section = header.closest('.section');
+            section.classList.toggle('collapsed');
+            saveCollapsedState();
+        }
+
+        function resetAll() {
+            if (confirm('Réinitialiser toute la checklist ?')) {
+                document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                updateProgress();
+                localStorage.clear();
+            }
+        }
+
+        function saveState() {
+            const state = {};
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                state[checkbox.id] = checkbox.checked;
+            });
+            localStorage.setItem('checklistImages', JSON.stringify(state));
+        }
+
+        function loadState() {
+            const saved = localStorage.getItem('checklistImages');
+            if (saved) {
+                const state = JSON.parse(saved);
+                Object.keys(state).forEach(id => {
+                    const checkbox = document.getElementById(id);
+                    if (checkbox) {
+                        checkbox.checked = state[id];
+                    }
+                });
+                updateProgress();
+            }
+        }
+
+        function saveCollapsedState() {
+            const collapsed = [];
+            document.querySelectorAll('.section.collapsed').forEach(section => {
+                collapsed.push(section.getAttribute('data-section'));
+            });
+            localStorage.setItem('collapsedImages', JSON.stringify(collapsed));
+        }
+
+        function loadCollapsedState() {
+            const saved = localStorage.getItem('collapsedImages');
+            if (saved) {
+                const collapsed = JSON.parse(saved);
+                collapsed.forEach(sectionName => {
+                    const section = document.querySelector(`[data-section="${sectionName}"]`);
+                    if (section) {
+                        section.classList.add('collapsed');
+                    }
+                });
+            }
+        }
+
+        window.onload = function() {
+            loadState();
+            loadCollapsedState();
+        };
+
+        updateProgress();
+    </script>
+</body>
+</html>
